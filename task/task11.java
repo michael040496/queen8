@@ -22,7 +22,7 @@ public class task11{
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
-            int [] pos = t11.translate(input); //Takes the user input as a rank + file coordinate, and translates it
+            int [] pos = t11.translate(input); //Takes the user input as an algeabraic notation, and translates it
 
             if(t11.checkPlacable(board,str,pos[0],pos[1])){
                 board[pos[0]][pos[1]] = "x";
@@ -34,7 +34,7 @@ public class task11{
         }
     }
 
-    public void solve(String [][] board, int str){
+    public void solve(String [][] board, int str, int [] coordinates){ //jobbe med denne på fredag
         for (int i = 0; i < str; i++) {
             for (int j = 0; j < str; j++) {
                 if ((board[j][i]).equals("o")){
@@ -54,7 +54,7 @@ public class task11{
                 return false;
             }
         }
-        // checks the whole row for the coordinate
+        // checks the whole column for the coordinate
         for (int i = 0; i < str; i++) {
             if ((board[row][i]).equals("x")){
                 return false;
@@ -86,7 +86,7 @@ public class task11{
         }
     }
 
-    public int [] translate(String pos){
+    public int [] translate(String pos){//translates the users String input into an array
         String pos1 = pos.substring(0,1);
         String pos2 = pos.substring(1,2);
         int p1 = 9;
