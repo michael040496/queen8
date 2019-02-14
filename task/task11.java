@@ -6,16 +6,16 @@ public class task11{
 
         task11 t11 = new task11();
         int str = 8;
-        
+
         String [][] brett = new String[str][str];
-        
+
         for (int i = 0; i < str; i++) {
             for (int j = 0; j < str; j++) {
                 brett[i][j] = "o";
             }
         }
 
-        
+
         t11.matprint(brett);
         while(true){
             System.out.println("Skriv felt: ");
@@ -23,16 +23,67 @@ public class task11{
             String input = sc.nextLine();
 
             int [] pos = t11.translate(input);
-            brett[pos[0]][pos[1]] = "x";
-            
+
+            if(t11.checkPlacable(brett,str,pos[0],pos[1])){
+                brett[pos[0]][pos[1]] = "x";
+            }
+
+
+
             t11.matprint(brett);
-        }        
+        }
+    }
+
+    public void solve(String [][] brett, int str){
+        for (int i = 0; i < str; i++) {
+            for (int j = 0; j < str; j++) {
+                if ((brett[j][i]).equals("o")){
+                    for (int k = 0; k < str; k++) {
+
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean checkPlacable(String [][] brett, int str, int row, int column){
+        // checks the whole row for the coordinate
+        for (int i = 0; i < str; i++) {
+            //System.out.println(brett[i][column]);
+            if ((brett[i][column]).equals("x")){
+                return false;
+            }
+        }
+        // checks the whole row for the coordinate
+        for (int i = 0; i < str; i++) {
+            if ((brett[row][i]).equals("x")){
+                return false;
+            }
+        }
+        // checks the diagonals of the coordinate
+        // upright
+        for (int i = 0; i < str; i++) {
+
+            if((row-i) < 0 || (column+i >= str)) break;
+            if((brett[row-i][column+i]).equals("x")){
+                return false;
+            }
+        }
+        //downleft
+        for (int i = 0; i < str; i++) {
+
+            if((row+i) >= str || (column-i < 0)) break;
+            if((brett[row+i][column-i]).equals("x")){
+                return false;
+            }
+        }
+        return true;
     }
 
     public void matprint(String [][] brett){
         for (String[] row : brett){
-            System.out.println(Arrays.toString(row)); 
-        } 
+            System.out.println(Arrays.toString(row));
+        }
     }
 
     public int [] translate(String pos){
@@ -50,7 +101,7 @@ public class task11{
         if(pos1.equals("g")) p1=1;
         if(pos1.equals("h")) p1=0;
 
-        
+
         if(pos2.equals("1")) p2=0;
         if(pos2.equals("2")) p2=1;
         if(pos2.equals("3")) p2=2;
