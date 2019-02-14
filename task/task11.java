@@ -7,37 +7,37 @@ public class task11{
         task11 t11 = new task11();
         int str = 8;
 
-        String [][] brett = new String[str][str];
+        String [][] board = new String[str][str];//a two dimensional array representing the board 
 
-        for (int i = 0; i < str; i++) {
+        for (int i = 0; i < str; i++) {    //the visual makeup of the board. A 8x8 board consisting of "o's"
             for (int j = 0; j < str; j++) {
-                brett[i][j] = "o";
+                board[i][j] = "o";
             }
         }
 
 
-        t11.matprint(brett);
+        t11.matprint(board);
         while(true){
             System.out.println("Skriv felt: ");
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
-            int [] pos = t11.translate(input);
+            int [] pos = t11.translate(input); //Takes the user input as a rank + file coordinate, and translates it
 
-            if(t11.checkPlacable(brett,str,pos[0],pos[1])){
-                brett[pos[0]][pos[1]] = "x";
+            if(t11.checkPlacable(board,str,pos[0],pos[1])){
+                board[pos[0]][pos[1]] = "x";
             }
 
 
 
-            t11.matprint(brett);
+            t11.matprint(board);
         }
     }
 
-    public void solve(String [][] brett, int str){
+    public void solve(String [][] board, int str){
         for (int i = 0; i < str; i++) {
             for (int j = 0; j < str; j++) {
-                if ((brett[j][i]).equals("o")){
+                if ((board[j][i]).equals("o")){
                     for (int k = 0; k < str; k++) {
 
                     }
@@ -46,17 +46,17 @@ public class task11{
         }
     }
 
-    public boolean checkPlacable(String [][] brett, int str, int row, int column){
+    public boolean checkPlacable(String [][] board, int str, int row, int column){
         // checks the whole row for the coordinate
         for (int i = 0; i < str; i++) {
             //System.out.println(brett[i][column]);
-            if ((brett[i][column]).equals("x")){
+            if ((board[i][column]).equals("x")){
                 return false;
             }
         }
         // checks the whole row for the coordinate
         for (int i = 0; i < str; i++) {
-            if ((brett[row][i]).equals("x")){
+            if ((board[row][i]).equals("x")){
                 return false;
             }
         }
@@ -65,7 +65,7 @@ public class task11{
         for (int i = 0; i < str; i++) {
 
             if((row-i) < 0 || (column+i >= str)) break;
-            if((brett[row-i][column+i]).equals("x")){
+            if((board[row-i][column+i]).equals("x")){
                 return false;
             }
         }
@@ -73,7 +73,7 @@ public class task11{
         for (int i = 0; i < str; i++) {
 
             if((row+i) >= str || (column-i < 0)) break;
-            if((brett[row+i][column-i]).equals("x")){
+            if((board[row+i][column-i]).equals("x")){
                 return false;
             }
         }
@@ -81,7 +81,7 @@ public class task11{
     }
 
     public void matprint(String [][] brett){
-        for (String[] row : brett){
+        for (String[] row : board){
             System.out.println(Arrays.toString(row));
         }
     }
