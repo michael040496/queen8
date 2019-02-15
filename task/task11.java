@@ -26,21 +26,19 @@ public class task11 {
                 brett[pos[0]][pos[1]] = "x"; //places the queen as an "X"
             }
 
-        System.out.println("pos[1]" + pos[1]);
             t11.matprint(brett);
 
             boolean solv = t11.solve(brett, 0, str, pos[1]); 
 
             t11.matprint(brett);
 
-        System.out.println(solv);
     }
 
     boolean solve(String brett[][], int column, int str, int strtCol) {/*a recursive method that creates a solution 
         based on the user input (the algeabraic coordinates)*/
 
         if (column >= str) {
-            System.out.println("before end: " + column);
+            System.out.println(" ");
             return true;
         }
 
@@ -81,7 +79,6 @@ public class task11 {
 
             if ((row - i) < 0 || (column + i >= str)) break;
             if ((brett[row - i][column + i]).equals("x")) {
-                System.out.println("upright");
                 return false;
             }
         }
@@ -91,7 +88,6 @@ public class task11 {
             if ((row + i) >= str || ((column - i) < 0)) break;
 
             if ((brett[row + i][column - i]).equals("x")) {
-                System.out.println("downleft");
                 return false;
             }
         }
@@ -102,7 +98,6 @@ public class task11 {
             if ((row - i) < 0 || (column - i < 0)) break;
 
             if ((brett[row - i][column - i]).equals("x")) {
-                System.out.println("upleft");
                 return false;
             }
         }
@@ -113,7 +108,6 @@ public class task11 {
             if ((row + i) >= str || (column + i >= str)) break;
 
             if ((brett[row + i][column + i]).equals("x")) {
-                System.out.println("downright");
                 return false;
             }
         }
@@ -127,7 +121,7 @@ public class task11 {
     }
 
     public int[] translate(String pos) {//the method translating the user "String"- coordinates into ints we can work with 
-        String pos2 = pos.substring(0, 1);
+        String pos2 = (pos.substring(0, 1)).toLowerCase();
         String pos1 = pos.substring(1, 2);
         //splits the input into two chars
         int p1 = 9;
