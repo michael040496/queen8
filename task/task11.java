@@ -6,50 +6,50 @@ public class task11 {
         task11 t11 = new task11();
         int str = 8;
 
-        String[][] board = new String[str][str];
+        String[][] brett = new String[str][str];
 
         for (int i = 0; i < str; i++) {
             for (int j = 0; j < str; j++) {
-                board[i][j] = "o";
+                brett[i][j] = "o";
             }
         }
 
-        t11.matprint(board);
+        t11.matprint(brett);
        // while (true) {
-            System.out.println("Write coordinate: ");
+            System.out.println("Write coordinate");
             Scanner sc = new Scanner(System.in);
             String input = sc.nextLine();
 
             int[] pos = t11.translate(input);
 
-            if (t11.checkPlacable(board, str, pos[0], pos[1])) {
-                board[pos[0]][pos[1]] = "x";
+            if (t11.checkPlacable(brett, str, pos[0], pos[1])) {
+                brett[pos[0]][pos[1]] = "x";
             }
 
         System.out.println("pos[1]" + pos[1]);
-            t11.matprint(board);
-            if(!t11.solve(board, 0, str, pos[1])){
-                System.out.println("Solution does not exist");
-            }else{
-                t11.matprint(board);
-            }
+            t11.matprint(brett);
+
+            boolean solv = t11.solve(brett, 0, str, pos[1]);
+
+            t11.matprint(brett);
+
+        System.out.println(solv);
     }
 
     boolean solve(String brett[][], int column, int str, int strtCol) {
 
         if (column >= str) {
+            System.out.println("before end: " + column);
             return true;
         }
 
             for (int i = 0; i < str; i++) {
 
-                System.out.println("i: " + i);
+                if (checkPlacable(brett, str, i, column) || column == strtCol) {
 
-
-                if (checkPlacable(brett, str, i, column) || column == 
-strtCol) {
-
-                    brett[i][column] = "x";
+                    if(column != strtCol) {
+                        brett[i][column] = "x";
+                    }
 
                     if (solve(brett, column + 1, str, strtCol) == true)
                         return true;
@@ -60,10 +60,7 @@ strtCol) {
         return false;
     }
 
-
-
-    public boolean checkPlacable(String[][] brett, int str, int row, int 
-column) {
+    public boolean checkPlacable(String[][] brett, int str, int row, int column) {
         // checks the whole column for the coordinate
         for (int i = 0; i < str; i++) {
             //System.out.println(brett[i][column]);
@@ -158,3 +155,4 @@ column) {
         return new int[]{p1, p2};
     }
 }
+
